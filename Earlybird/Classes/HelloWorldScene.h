@@ -13,7 +13,7 @@ public:
     virtual bool init();  
     
     // a selector callback
-    void menuCloseCallback(Object* pSender);
+    void menuCloseCallback(Ref* pSender);
     
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);

@@ -11,7 +11,7 @@ static cocos2d::Size largeResolutionSize = cocos2d::Size(1536, 2048);
 
 AppDelegate::AppDelegate() {}
 
-AppDelegate::~AppDelegate() 
+AppDelegate::~AppDelegate()
 {
 }
 
@@ -52,16 +52,17 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
      // set FPS. the default value is 1.0/60 if you don't call this
      director->setAnimationInterval(1.0f / 60);
-     
+
     Size frameSize = glview->getFrameSize();
 
     glview->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, ResolutionPolicy::SHOW_ALL);
 
     // set the resource directory
     this->setResourceSearchResolution();
-    
+
     register_all_packages();
-	
+
+    //第一个场景
     // create a scene. it's an autorelease object
     auto scene = LoadingScene::create();
 
@@ -90,7 +91,7 @@ void AppDelegate::applicationWillEnterForeground() {
 void AppDelegate::setResourceSearchResolution()
 {
     std::vector<std::string> paths;
-	paths.push_back("fonts");
+	paths.emplace_back("fonts");
     paths.push_back("image");
     paths.push_back("sounds");
     FileUtils::getInstance()->setSearchResolutionsOrder(paths);

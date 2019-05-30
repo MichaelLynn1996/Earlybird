@@ -12,8 +12,6 @@ using namespace cocos2d;
 using namespace std;
 using namespace CocosDenshion;
 
-const int START_BUTTON_TAG = 100;
-
 class WelcomeLayer : public Layer{
 public:
 	WelcomeLayer(void);
@@ -26,7 +24,7 @@ private:
 	/**
      * The start button has been pressed will call this function
      */
-	void menuStartCallback(Object *sender);
+	void menuStartCallback(Ref *sender);
     
 	/**
      * This method is make the land have a scroll animation
