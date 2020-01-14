@@ -16,70 +16,75 @@ const string NUMBER_SCORE = "number_score";
 const string NUMBER_FONT = "font";
 const int CURRENT_SCORE_SPRITE_TAG = 10001;
 
-class StatusLayer:public Layer,public StatusDelegate{
+/**
+ * 状态层：游戏过程中分数的显示，根据游戏的不同阶段，显示游戏状态（开始、游戏进行中、游戏结束）
+ */
+class StatusLayer : public Layer, public StatusDelegate {
 public:
-	StatusLayer(void);
+    StatusLayer(void);
 
-	~StatusLayer(void);
+    ~StatusLayer(void);
 
-	virtual bool init();
+    virtual bool init();
 
-	CREATE_FUNC(StatusLayer);
+    CREATE_FUNC(StatusLayer);
 
-	void onGameStart();
+    void onGameStart();
 
-	void onGamePlaying(int score);
+    void onGamePlaying(int score);
 
-	void onGameEnd(int curScore, int bestScore);
+    void onGameEnd(int curScore, int bestScore);
 
 private:
-	void showReadyStatus();
+    void showReadyStatus();
 
-	void showStartStatus();
+    void showStartStatus();
 
-	void showOverStatus(int curScore, int bestScore);
+    void showOverStatus(int curScore, int bestScore);
 
-	void loadWhiteSprite();
+    void loadWhiteSprite();
 
-	void blinkFullScreen();
+    void blinkFullScreen();
 
-	void fadeInGameOver();
+    void fadeInGameOver();
 
-	void jumpToScorePanel();
+    void jumpToScorePanel();
 
-	void fadeInRestartBtn();
+    void fadeInRestartBtn();
 
-	void refreshScoreCallback();
+    void refreshScoreCallback();
 
-	void refreshScoreExecutor(float dt);
+    void refreshScoreExecutor(float dt);
 
-	string getMedalsName(int score);
+    string getMedalsName(int score);
 
-	Sprite* blink;
+    Sprite *blink;
 
-	void setBlinkSprite();
+    void setBlinkSprite();
 
-	void blinkAction();
+    void blinkAction();
 
-	void menuRestartCallback(Ref *sender);
+    void menuRestartCallback(Ref *sender);
 
-	Sprite* scoreSprite;
+    void menuEndCallback(Ref *sender);
 
-	Sprite* getreadySprite;
+    Sprite *scoreSprite;
 
-	Sprite* tutorialSprite;
+    Sprite *getreadySprite;
 
-	Sprite* whiteSprite;
-    
+    Sprite *tutorialSprite;
+
+    Sprite *whiteSprite;
+
     int currentScore;
-    
+
     int bestScore;
-	
-	int tmpScore;
 
-	bool isNewRecord;
+    int tmpScore;
 
-	Point originPoint;
+    bool isNewRecord;
 
-	Size visibleSize;
+    Point originPoint;
+
+    Size visibleSize;
 };

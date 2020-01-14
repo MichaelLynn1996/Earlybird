@@ -1,36 +1,38 @@
 #pragma once
+
 #include "cocos2d.h"
 
 using namespace std;
 using namespace cocos2d;
 
-class UserRecord : public Ref
-{
+class UserRecord : public Ref {
 public:
-	UserRecord();
-	~UserRecord();
+    UserRecord();
 
-	static UserRecord* getInstance();
+    ~UserRecord();
 
-	static void destroyInstance();
+    static UserRecord *getInstance();
 
-	virtual bool init();
-	/**
-	 * @var key : the key that point the the data which will be sotred
-	 *
-	 * @var data: the data will be stored
-	 *
-	 * as a matter of fact, the score will be stored in local memory with XML format.
-	 */
-	void saveIntegerToUserDefault(const char* key, int score);
+    static void destroyInstance();
 
-	/*
-	 * @var key: get the data with the key we used to stored it.
-	 *
-	 * @return the data we have been stored, with the attached key
-	 */
-	int readIntegerFromUserDefault(const char* key);
+    virtual bool init();
+
+    /**
+     * @var key : the key that point the the data which will be sotred
+     *
+     * @var data: the data will be stored
+     *
+     * as a matter of fact, the score will be stored in local memory with XML format.
+     */
+    void saveIntegerToUserDefault(const char *key, int score);
+
+    /*
+     * @var key: get the data with the key we used to stored it.
+     *
+     * @return the data we have been stored, with the attached key
+     */
+    int readIntegerFromUserDefault(const char *key);
 
 private:
-	static UserRecord* shareUserRecord;
+    static UserRecord *shareUserRecord;
 };

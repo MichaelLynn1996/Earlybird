@@ -1,76 +1,41 @@
 #include "HelloWorldScene.h"
-#include "AtlasLoader.h"
 
-USING_NS_CC;
+HelloWorldScene::HelloWorldScene() = default;
 
-Scene* HelloWorld::createScene()
-{
-    // 'scene' is an autorelease object
-    auto scene = Scene::create();
-    
-    // 'layer' is an autorelease object
-    auto layer = HelloWorld::create();
+HelloWorldScene::~HelloWorldScene() = default;
 
-    // add layer as a child to scene
-    scene->addChild(layer);
-
-    // return the scene
-    return scene;
+bool HelloWorldScene::init() {
+    return Scene::init();
 }
 
-// on "init" you need to initialize your instance
-bool HelloWorld::init()
-{
-    //////////////////////////////
-    // 1. super init first
-    if ( !Layer::init() )
-    {
-        return false;
-    }
-    
+void HelloWorldScene::onEnter() {
+    // add background to current scene
+    Sprite *background = Sprite::create("splash.png");
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Point origin = Director::getInstance()->getVisibleOrigin();
+    background->setPosition(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 2);
+    this->addChild(background);
 
-    /////////////////////////////
-    // 2. add a menu item with "X" image, which is clicked to quit the program
-    //    you may modify it.
-
-    // add a "close" icon to exit the progress. it's an autorelease object
-    auto closeItem = MenuItemImage::create(
-                                           "CloseNormal.png",
-                                           "CloseSelected.png",
-                                           CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
-    
-	closeItem->setPosition(Point(origin.x + visibleSize.width - closeItem->getContentSize().width/2 ,
-                                origin.y + closeItem->getContentSize().height/2));
-
-    // create menu, it's an autorelease object
-    auto menu = Menu::create(closeItem, NULL);
-    menu->setPosition(Point::ZERO);
-    this->addChild(menu, 1);
-
-	// here is the sample to use AtlasLoader
-	Sprite *bird = Sprite::createWithSpriteFrame(AtlasLoader::getInstance()->getSpriteFrameByName("bird0_0"));
-	bird->setPosition(Point(origin.x + visibleSize.width/2,
-                            origin.y + visibleSize.height/2));
-
-	Animation *animation = Animation::create();
-	animation->setDelayPerUnit(0.08f);
-	animation->addSpriteFrame(AtlasLoader::getInstance()->getSpriteFrameByName("bird0_1"));
-	animation->addSpriteFrame(AtlasLoader::getInstance()->getSpriteFrameByName("bird0_2"));
-	Animate *animate = Animate::create(animation);
-	bird->runAction(RepeatForever::create(animate));
-	this->addChild(bird);
-    
-    return true;
+    // start Async method load the atlas.png
+    // 资源包括图片素材的载入和音乐素材的载入
+    Director::getInstance()->getTextureCache()->addImageAsync("atlas.png", CC_CALLBACK_1(
+            HelloWorldScene::loadingCallBack, this));
 }
 
+void HelloWorldScene::loadingCallBack(Texture2D *texture) {
+    AtlasLoader::getInstance()->loadAtlas("atlas.txt", texture);
 
-void HelloWorld::menuCloseCallback(Ref* pSender)
-{
-    Director::getInstance()->end();
+    // After loading the texture , preload all the sound
+    SimpleAudioEngine::getInstance()->preloadEffect("sfx_die.ogg");
+    SimpleAudioEngine::getInstance()->preloadEffect("sfx_hit.ogg");
+    SimpleAudioEngine::getInstance()->preloadEffect("sfx_point.ogg");
+    SimpleAudioEngine::getInstance()->preloadEffect("sfx_swooshing.ogg");
+    SimpleAudioEngine::getInstance()->preloadEffect("sfx_wing.ogg");
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    exit(0);
-#endif
+    // After load all the things, change the scene to new one
+    //auto scene = HelloWorld::createScene();
+    // 载入完成后跳转到下一个界面
+    auto scene = WelcomeScene::create();
+    TransitionScene *transition = TransitionFade::create(1, scene);
+    Director::getInstance()->replaceScene(transition);
 }

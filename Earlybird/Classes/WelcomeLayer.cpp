@@ -1,8 +1,8 @@
 ﻿#include "WelcomeLayer.h"
 
-WelcomeLayer::WelcomeLayer() {};
+WelcomeLayer::WelcomeLayer() = default;;
 
-WelcomeLayer::~WelcomeLayer() {};
+WelcomeLayer::~WelcomeLayer() = default;;
 
 bool WelcomeLayer::init() {
     if (!Layer::init()) {
@@ -13,7 +13,8 @@ bool WelcomeLayer::init() {
     Point origin = Director::getInstance()->getVisibleOrigin();
 
     //get the current time, the background image will selected by current time day or night: bg_day or bg_night
-    time_t t = time(NULL);
+    //在白天的时候显示白天的背景，而在晚上的时候显示晚上的背景
+    time_t t = time(nullptr);
     tm *lt = localtime(&t);
     int hour = lt->tm_hour;
     //create the background image according to the current time;
@@ -46,7 +47,8 @@ bool WelcomeLayer::init() {
     menuItem->setPosition(
             Point(origin.x + visibleSize.width / 2, origin.y + visibleSize.height * 2 / 5));
 
-    auto menu = Menu::create(menuItem, NULL);
+    Menu * menu;
+    menu = Menu::create(menuItem, NULL);
     menu->setPosition(Point(origin.x, origin.y));
     this->addChild(menu, 1);
 
@@ -97,6 +99,7 @@ void WelcomeLayer::scrollLand(float dt) {
 void WelcomeLayer::menuStartCallback(Ref *sender) {
     SimpleAudioEngine::getInstance()->playEffect("sfx_swooshing.ogg");
     this->removeChildByTag(BIRD_SPRITE_TAG);
+    //在此打开游戏场景
     auto scene = GameScene::create();
     TransitionScene *transition = TransitionFade::create(1, scene);
     Director::getInstance()->replaceScene(transition);

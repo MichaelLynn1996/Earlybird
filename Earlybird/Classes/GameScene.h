@@ -1,4 +1,5 @@
 #pragma once
+
 #include "cocos2d.h"
 #include "BackgroundLayer.h"
 #include "GameLayer.h"
@@ -7,15 +8,15 @@
 
 using namespace cocos2d;
 
-class GameScene:public Scene{
+class GameScene : public Scene {
 public:
-	GameScene();
+    GameScene();
 
-	~GameScene();
+    ~GameScene();
 
-	bool virtual init();
-    
+    bool virtual init();
+
     void restart();
 
-	CREATE_FUNC(GameScene);
+    CREATE_FUNC(GameScene);
 };

@@ -51,40 +51,38 @@ list(APPEND GAME_SOURCE
      Classes/AppDelegate.cpp
      Classes/BackgroundLayer.cpp
      Classes/GameLayer.cpp
-     Classes/MenuScene.cpp
      Classes/OptionLayer.cpp
      Classes/UserRecord.cpp
      Classes/WelcomeScene.cpp
      Classes/AtlasLoader.cpp
      Classes/BirdSprite.cpp
      Classes/GameScene.cpp
-     Classes/LoadingScene.cpp
      Classes/Number.cpp
      Classes/StatusLayer.cpp
      Classes/WelcomeLayer.cpp
+     Classes/HelloWorldScene.cpp
      )
 list(APPEND GAME_HEADER
      Classes/AppDelegate.h
      Classes/BackgroundLayer.h
      Classes/GameLayer.h
-     Classes/MenuScene.h
      Classes/OptionLayer.h
      Classes/UserRecord.h
      Classes/WelcomeScene.h
      Classes/AtlasLoader.h
      Classes/BirdSprite.h
      Classes/GameScene.h
-     Classes/LoadingScene.h
      Classes/Number.h
      Classes/StatusLayer.h
      Classes/WelcomeLayer.h
+     Classes/HelloWorldScene.h
      )
 
 if(ANDROID)
     # change APP_NAME to the share library name for Android, it's value depend on AndroidManifest.xml
     set(APP_NAME MyGame)
     list(APPEND GAME_SOURCE
-         proj.android/app/jni/hellocpp/main.cpp
+         proj.android_studio/app/jni/hellocpp/main.cpp
          )
 elseif(LINUX)
     list(APPEND GAME_SOURCE

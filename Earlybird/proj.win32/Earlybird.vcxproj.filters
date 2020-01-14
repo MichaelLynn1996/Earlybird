@@ -27,9 +27,6 @@
     <ClCompile Include="..\Classes\AtlasLoader.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\LoadingScene.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\WelcomeLayer.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
@@ -51,10 +48,10 @@
     <ClCompile Include="..\Classes\BirdSprite.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Number.cpp">
+    <ClCompile Include="..\Classes\UserRecord.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\UserRecord.cpp">
+    <ClCompile Include="..\Classes\Number.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -72,9 +69,6 @@
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\AtlasLoader.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\LoadingScene.h">
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\WelcomeLayer.h">
